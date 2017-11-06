@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style type="text/css">
+			.wrap{
+				width: 500px;
+				height: 280px;
+				border: 10px solid red;
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			.box{
+				width: 3500px;
+				height: 280px;
+				position: absolute;
+				left: -500px;
+				/* overflow: hidden; */
+			}
+			.item{
+				width: 500px;
+				height: 280px;
+				float: left;
+				font-size: 100px;
+				color: white;
+				text-align: center;
+				line-height: 280px;
+
+			}
+			.item1{
+				background: red;
+			}
+			.item2{
+				background: yellow;
+			}
+			.item3{
+				background: blue;
+			}
+			.item4{
+				background: green;
+			}
+			.item5{
+				background: cyan;
+			}
+			.pre,.next{
+				position: absolute;
+				top: 115px;
+				background-color: black;
+				height: 50px;
+				width: 30px;
+				color: white;
+				text-align: center;
+				line-height: 50px;
+
+			}
+			.next{
+				left: 470px;
+			}
+			.divs{
+				width: 150px;
+				height: 20px;
+				position: absolute;
+				top: 260px;
+				left: 175px;
+				/* border: 1px solid gray; */
+			}
+			.rad{
+				width: 15px;
+				height: 15px;
+				float: left;
+				margin: 0 7.5px;
+				background: purple;
+				border-radius: 50%;
+
+			}
+		</style>
+	</head>
+	<body>
+		<!-- div.wrap>div.box>div.item.item${$}*5 -->
+		<div class="wrap">
+			<div class="box">
+				<div class="item item5">5</div>
+				<div class="item item1">1</div>
+				<div class="item item2">2</div>
+				<div class="item item3">3</div>
+				<div class="item item4">4</div>
+				<div class="item item5">5</div>
+				<div class="item item1">1</div>
+			</div>
+			<div class="pre" onclick="pre()">《</div>
+			<div class="next" onclick="next()">》</div>
+			<div class="divs">
+				<div class="rad"></div>
+				<div class="rad"></div>
+				<div class="rad"></div>
+				<div class="rad"></div>
+				<div class="rad"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementsByClassName("box")[0];
+		var rad=document.getElementsByClassName("rad");
+		var index=1
+		var moveTimer;
+		function next(){
+			clearInterval(timer1);
+			index++;
+			if(index==7){
+				index=2;
+				box.style.left="-500px";
+			}
+			movewithIndex();
+			demo();
+
+		}
+		function pre(){
+			clearInterval(timer1);
+			index--;
+			if(index==-1){
+				index=4;
+				box.style.left="-2500px";
+			}
+			movewithIndex();
+			demo();
+		}
+		function movewithIndex(){
+			var l=index*-500-box.offsetLeft;
+			
+			var count=0;
+			clearInterval(moveTimer);
+			 moveTimer=setInterval(function(){
+				count++;
+				box.style.left=box.offsetLeft+l/20+"px"
+				if(count>=20){
+					clearInterval(moveTimer)
+					box.style.left=index* -500+"px";
+				}
+			},20)
+		}
+		var timer1
+		function demo(){
+			timer1=setInterval(function(){
+				clearInterval(moveTimer);
+				next();
+			},3000)
+		}	
+		for(var i=0;i<rad.length;i++){
+			rad[i].index=i;
+			var rads=rad[0];
+			rad[i].onmouseover=function(){
+				clearInterval(timer1);
+				rads.style.background="purple";
+				this.style.background="greenyellow";
+				rads=this;
+				index=this.index+1;
+				box.style.left=index* -500+"px";
+				demo();
+			}
+		}
+	</script>
+</html>
