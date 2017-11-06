@@ -1,0 +1,130 @@
+<!--horizontal水平方向-->
+<!--vertical垂直方向-->
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.swiper-container {
+				width: 600px;
+				height: 300px;
+			}
+		</style>
+		<link rel="stylesheet" href="swiper.min.css">
+	</head>
+
+	<body>
+		<div class="swiper-container wrap1">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="img/1.jpg"/></div>
+				<div class="swiper-slide"><img src="img/2.jpg"/></div>
+				<div class="swiper-slide"><img src="img/3.jpg"/></div>
+				<div class="swiper-slide"><img src="img/4.jpg"/></div>
+				<div class="swiper-slide"><img src="img/5.PNG"/></div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+
+			<!-- 如果需要导航按钮 -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			<!-- 如果需要滚动条 -->
+			<div class="swiper-scrollbar"></div>
+		</div>
+		<div class="swiper-container wrap2">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="img/1.jpg"/></div>
+				<div class="swiper-slide"><img src="img/2.jpg"/></div>
+				<div class="swiper-slide"><img src="img/3.jpg"/></div>
+				<div class="swiper-slide"><img src="img/4.jpg"/></div>
+				<div class="swiper-slide"><img src="img/5.PNG"/></div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+
+			<!-- 如果需要导航按钮 -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			<!-- 如果需要滚动条 -->
+			<div class="swiper-scrollbar"></div>
+		</div>
+		<input type="button" name="" value="开启或者关闭轮播" id="autoplay">
+		<script src="jquery.min.js"></script>
+		<script src="swiper.jquery.min.js"></script>
+		<script>
+			// 基本设置项 一般写在newSwiper里面，给swiper进行初始设置
+			// 回调函数 在swiper出发了某些事情后，告诉我们什么时候触发的
+			// 属性 让我们获取Swiper信息，如当前下标
+			// 方法 让我们对swiper 进行操作
+			var osAutoplay=document.getElementById("autoplay");
+			osAutoplay.onclick=function(){
+				// 点击控制自动播放
+				// if(mySwiper2.autoplaying){
+				// 	mySwiper2.stopAutoplay();
+				// }else{
+				// 	mySwiper2.startAutoplay();
+				// }
+				// 删除第一张图片
+				// mySwiper2.removeSlide(0);
+				// 当你使用js来删除slide时可能会用到。使用mySwiper.removeSlide来删除slide则会自动计算，无需使用此方法。
+				document.querySelectorAll(".swiper-slide")[1].remove();
+				mySwiper2.updateSlidesSize();
+
+			}
+			var mySwiper1 = new Swiper('.wrap1', {
+				direction: 'horizontal',
+				loop: true,
+//				用户操作后autoplay 会停止,当使用autoplayDisableOnInteraction:false,就会再次重启autoplay 
+//				autoplayStopOnLast如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）
+				autoplay:1000,
+				initialSlide:2,
+				autoplayDisableOnInteraction:false,
+				// 如果需要分页器
+				pagination: '.swiper-pagination',
+//				设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。（根据浏览器形状有所不同）
+				grabCursor:true,
+				// 如果需要前进后退按钮
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+
+				// 如果需要滚动条
+				scrollbar: '.swiper-scrollbar',
+			})
+			var mySwiper2 = new Swiper('.wrap2', {
+				direction: 'vertical',
+				loop: true,
+//				用户操作后autoplay 会停止,当使用autoplayDisableOnInteraction:false,就会再次重启autoplay 
+//				autoplayStopOnLast如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）
+				autoplay:1000,
+				autoplayDisableOnInteraction:false,
+				// 如果需要分页器
+				pagination: '.swiper-pagination',
+//				设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。（根据浏览器形状有所不同）
+				grabCursor:true,
+				// 如果需要前进后退按钮
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+
+				// 如果需要滚动条
+				scrollbar: '.swiper-scrollbar',
+				onInit: function(swiper){
+			      //Swiper初始化了
+			      console.log("swiper 初始化完毕");//提示Swiper的当前索引
+			    },
+			    onSlideChangeEnd: function(swiper){
+			      console.log("swiper切换完毕") //切换结束时，告诉我现在是第几个slide
+			    }//,
+			    
+			})
+			setInterval(function(){
+			    	console.log(mySwiper2.activeIndex)
+			    },1000)
+		</script>
+	</body>
+
+</html>
